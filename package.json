@@ -1,0 +1,42 @@
+{
+  "name": "generator-spring",
+  "version": "0.1.0",
+  "description": "A generator for Yeoman",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "homepage": "https://github.com/tomaslin/generator-spring",
+  "bugs": "https://github.com/tomaslin/generator-spring/issues",
+  "author": {
+    "name": "Tomas Lin",
+    "email": "tomaslin@gmail.com",
+    "url": "https://github.com/tomaslin"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tomaslin/generator-spring.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.13.0",
+    "chalk": "~0.2.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0-rc.1"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
