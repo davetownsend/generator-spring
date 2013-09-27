@@ -124,6 +124,7 @@ SpringGenerator.prototype.app = function app() {
     this.mkdir(testDir);
     this.mkdir(srcDir);
     this.template('build.gradle', 'build.gradle');
+    this.template('Application.java', srcDir + '/Application.java');
 };
 
 SpringGenerator.prototype.projectfiles = function projectfiles() {

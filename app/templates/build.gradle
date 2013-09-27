@@ -26,6 +26,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:<%= bootVersion %>")
 }
 
-task wrapper(type: Wrapper) {
+task run(type:Exec){
+    commandLine "java -jar build/libs/<%= baseName %>-0.1.0.jar".split(' ')
+}
+
+run.dependsOn build
+
+task (type: Wrapper) {
     gradleVersion = '1.8'
 }
