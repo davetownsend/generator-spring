@@ -41,25 +41,25 @@ SpringGenerator.prototype.askFor = function askFor() {
         {
             type: 'string',
             name: 'bootVersion',
-            message: 'What version of Spring Boot would you like to use?',
+            message: '(1/6) What version of Spring Boot would you like to use?',
             default: '0.5.0.M4'
         },
         {
             type: 'string',
             name: 'packageName',
-            message: 'What is your default package name?',
+            message: '(2/6) What is your default package name?',
             default: 'com.myapp'
         },
         {
             type: 'string',
             name: 'baseName',
-            message: 'What is the base name of app?',
+            message: '(3/6) What is the base name of app?',
             default: 'app'
         },
         {
             type: 'checkbox',
             name: 'starters',
-            message: 'select your starters',
+            message: '(4/6) select your starters',
             choices: [
                 {
                     name: 'Jetty (Tomcat will be unintalled)',
@@ -79,11 +79,15 @@ SpringGenerator.prototype.askFor = function askFor() {
                 },
                 {
                     name: 'Data-jpa',
-                    value: 'data-jpd'
+                    value: 'jpa'
                 },
                 {
                     name: 'Integration',
                     value: 'integration'
+                },
+                {
+                    name: 'Hateoas',
+                    value: 'hateoas'
                 },
                 {
                     name: 'Jdbc',
@@ -98,33 +102,63 @@ SpringGenerator.prototype.askFor = function askFor() {
                     value: 'security'
                 },
                 {
-                    name: 'Web',
-                    value: 'web'
-                },
-                {
                     name: 'Websocket',
                     value: 'websocket'
                 }
             ]
+        },{
+            type: 'confirm',
+            name: 'useSpock',
+            message: '(5/6) Would you like to use Spock?',
+            default: true
+        },
+        {
+            type: 'confirm',
+            name: 'useWrapper',
+            message: '(6/6) Would you like to add the Gradle wrapper?',
+            default: true
         }
     ];
 
     this.prompt(prompts, function (props) {
         this.packageName = props.packageName;
         this.baseName = props.baseName;
+        this.useWrapper = props.useWrapper;
         this.bootVersion = props.bootVersion;
+        this.useSpock = props.useSpock;
+        this.starters = props.starters;
+
+        var hasStarter = function (starter) { return props.starters.indexOf(starter) !== -1; };
+        this.jetty = hasStarter('jetty');
+        this.actuator = hasStarter('actuator');
+        this.aop = hasStarter('aop');
+        this.batch = hasStarter('batch');
+        this.hateoas = hasStarter('hateoas');
+        this.jpa = hasStarter('jpa');
+        this.integration = hasStarter('integration');
+        this.jdbc = hasStarter('jdbc');
+        this.logging = hasStarter('logging');
+        this.security = hasStarter('security');
+        this.websocket = hasStarter('websocket');
+
         cb();
     }.bind(this));
 };
 
 SpringGenerator.prototype.app = function app() {
     var packageFolder = this.packageName.replace(/\./g, '/');
-    var testDir = 'src/test/groovy/' + packageFolder;
     var srcDir = 'src/main/java/' + packageFolder;
-    this.mkdir(testDir);
     this.mkdir(srcDir);
     this.template('build.gradle', 'build.gradle');
     this.template('Application.java', srcDir + '/Application.java');
+
+    if(this.useSpock){
+        var testDir = 'src/test/groovy/' + packageFolder;
+        this.mkdir(testDir);
+    }
+
+    this.config.set('packageName', this.packageName);
+    this.config.set('packageFolder', packageFolder);
 };
 
 SpringGenerator.prototype.projectfiles = function projectfiles() {
