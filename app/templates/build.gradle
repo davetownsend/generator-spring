@@ -28,21 +28,21 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web:<%= bootVersion %>')<% if( jetty ){ %>{
-        exclude module: "spring-boot-starter-tomcat"
+        exclude module: 'spring-boot-starter-tomcat'
     }
-    compile('org.springframework.boot:spring-boot-starter-jetty:<%= bootVersion %>')<% } %>
-    <% if( actuator ){ %>compile('org.springframework.boot:spring-boot-starter-actuator:<%= bootVersion %>')<% } %>
-    <% if( batch ){ %>compile('org.springframework.boot:spring-boot-starter-batch:<%= bootVersion %>')<% } %>
-    <% if( jdbc ){ %>compile('org.springframework.boot:spring-boot-starter-jdbc:<%= bootVersion %>')<% } %>
-    <% if( jpa ){ %>compile('org.springframework.boot:spring-boot-starter-data-jpa:<%= bootVersion %>')<% } %>
-    <% if( hateoas ){ %>compile('com.fasterxml.jackson.core:jackson-databind')
-        compile('org.springframework.hateoas:spring-hateoas:0.7.0.RELEASE')<% } %>
-    <% if( integration ){ %>compile('org.springframework.boot:spring-boot-starter-integration:<%= bootVersion %>')<% } %>
-    <% if( logging ){ %>compile('org.springframework.boot:spring-boot-starter-logging:<%= bootVersion %>')<% } %>
-    <% if( security ){ %>compile('org.springframework.boot:spring-boot-starter-security:<%= bootVersion %>')<% } %>
-    <% if( websocket ){ %>compile('org.springframework.boot:spring-boot-starter-websocket:<%= bootVersion %>')<% } %>
-    <% if( useSpock ) {%>testCompile "org.codehaus.groovy:groovy-all:2.1.7"
-    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"<%}%>
+    compile 'org.springframework.boot:spring-boot-starter-jetty:<%= bootVersion %>'<% } %>
+    <% if( actuator ){ %>compile 'org.springframework.boot:spring-boot-starter-actuator:<%= bootVersion %>'<% } %>
+    <% if( batch ){ %>compile 'org.springframework.boot:spring-boot-starter-batch:<%= bootVersion %>'<% } %>
+    <% if( jdbc ){ %>compile 'org.springframework.boot:spring-boot-starter-jdbc:<%= bootVersion %>'<% } %>
+    <% if( jpa ){ %>compile 'org.springframework.boot:spring-boot-starter-data-jpa:<%= bootVersion %>'<% } %>
+    <% if( hateoas ){ %>compile 'com.fasterxml.jackson.core:jackson-databind')
+    compile 'org.springframework.hateoas:spring-hateoas:0.7.0.RELEASE'<% } %>
+    <% if( integration ){ %>compile 'org.springframework.boot:spring-boot-starter-integration:<%= bootVersion %>'<% } %>
+    <% if( logging ){ %>compile 'org.springframework.boot:spring-boot-starter-logging:<%= bootVersion %>'<% } %>
+    <% if( security ){ %>compile 'org.springframework.boot:spring-boot-starter-security:<%= bootVersion %>'<% } %>
+    <% if( websocket ){ %>compile 'org.springframework.boot:spring-boot-starter-websocket:<%= bootVersion %>'<% } %>
+    <% if( useSpock ) {%>testCompile 'org.codehaus.groovy:groovy-all:2.1.7'
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'<%}%>
 }
 
 task run(type:Exec){
