@@ -62,7 +62,7 @@ SpringGenerator.prototype.askFor = function askFor() {
             message: '(4/6) select your starters',
             choices: [
                 {
-                    name: 'Jetty (Tomcat will be unintalled)',
+                    name: 'Jetty (Tomcat will be uninstalled)',
                     value: 'jetty'
                 },
                 {
