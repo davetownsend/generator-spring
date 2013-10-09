@@ -42,7 +42,7 @@ SpringGenerator.prototype.askFor = function askFor() {
             type: 'string',
             name: 'bootVersion',
             message: '(1/6) What version of Spring Boot would you like to use?',
-            default: '0.5.0.M4'
+            default: '0.5.0.M5'
         },
         {
             type: 'string',
