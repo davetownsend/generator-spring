@@ -46,7 +46,7 @@ dependencies {
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'<%}%>
 }
 
-task run(type:Exec){
+task run(type: Exec, overwrite: true){
     commandLine "java -jar build/libs/<%=baseName%>-0.1.0.jar".split(' ')
 }
 
