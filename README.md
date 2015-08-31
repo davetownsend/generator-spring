@@ -46,7 +46,7 @@ Creates a REST endpoint with HATEOAS support *(has dependency on choosing the ha
 $ yo spring:hateoas
 ```
 
-Creates an intial Thymeleaf view *(has dependency on choosing the Thyemleaf starter option)*
+Creates an initial Thymeleaf view *(has dependency on choosing the Thyemleaf starter option)*
 
 ```
 $ yo spring:route
