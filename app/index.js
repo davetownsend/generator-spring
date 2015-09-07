@@ -351,6 +351,12 @@ SpringGenerator.prototype.askFor = function askFor() {
         this.postgresql = hasDatabase('postgresql');
 
         // Spring Cloud
+        prompts.push({
+            type: 'string',
+            name: 'usesCloud',
+            message: 'usesCloud',
+            default: false
+        });
         var hasCloud = function(cloudStarter) {
             return props.cloud.indexOf(cloudStarter) !== -1;
         };
@@ -373,6 +379,7 @@ SpringGenerator.prototype.askFor = function askFor() {
         this.awsMessaging = hasCloud('awsMessaging');
         this.cloudBus = hasCloud('cloudBus');
         this.cloudSecurity = hasCloud('cloudSecurity');
+        this.usesCloud = props.cloud.length > 0;
 
         // I/O
         var hasIO = function(ioStarter) {
