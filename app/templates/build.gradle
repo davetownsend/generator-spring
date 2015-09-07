@@ -1,59 +1,117 @@
 buildscript {
+
     repositories {
-        maven { url 'http://repo.springsource.org/libs-snapshot' }
-        mavenLocal()
+        mavenCentral()
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:<%= bootVersion %>')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:<%= bootVersion %>")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
     }
 }
 
-<% if( useSpock ){%>
-apply plugin: 'groovy'
-<% } else { %>
 apply plugin: 'java'
-<% } %>
+apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
 
-jar {
-    baseName = '<%= baseName %>'
-    version =  '0.1.0'
-}
+sourceCompatibility = '<%= javaVersion %>'
+targetCompatibility = '<%= javaVersion %>'
 
 repositories {
     mavenCentral()
-    maven { url 'http://repo.springsource.org/libs-snapshot' }
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web:<%= bootVersion %>')<% if( jetty ){ %>{
-        exclude module: 'spring-boot-starter-tomcat'
+    <% if (web) { %>compile("org.springframework.boot:spring-boot-starter-web:<%= bootVersion %>")<% if (jetty) { %> {
+        exclude module: "spring-boot-starter-tomcat"
     }
-    compile 'org.springframework.boot:spring-boot-starter-jetty:<%= bootVersion %>'<% } %>
-    compile 'org.thymeleaf:thymeleaf-spring3:2.0.17'
-    <% if( actuator ){ %>compile 'org.springframework.boot:spring-boot-starter-actuator:<%= bootVersion %>'<% } %>
-    <% if( batch ){ %>compile 'org.springframework.boot:spring-boot-starter-batch:<%= bootVersion %>'<% } %>
-    <% if( jdbc ){ %>compile 'org.springframework.boot:spring-boot-starter-jdbc:<%= bootVersion %>'<% } %>
-    <% if( jpa ){ %>compile 'org.springframework.boot:spring-boot-starter-data-jpa:<%= bootVersion %>'<% } %>
-    <% if( hateoas ){ %>compile 'com.fasterxml.jackson.core:jackson-databind'
-    compile 'org.springframework.hateoas:spring-hateoas:0.7.0.RELEASE'<% } %>
-    <% if( integration ){ %>compile 'org.springframework.boot:spring-boot-starter-integration:<%= bootVersion %>'<% } %>
-    <% if( logging ){ %>compile 'org.springframework.boot:spring-boot-starter-logging:<%= bootVersion %>'<% } %>
-    <% if( security ){ %>compile 'org.springframework.boot:spring-boot-starter-security:<%= bootVersion %>'<% } %>
-    <% if( websocket ){ %>compile 'org.springframework.boot:spring-boot-starter-websocket:<%= bootVersion %>'<% } %>
-    <% if( useSpock ) {%>testCompile 'org.codehaus.groovy:groovy-all:2.1.7'
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'<%}%>
+    compile("org.springframework.boot:spring-boot-starter-jetty:<%= bootVersion %>")<% } %>
+    <% } %>
+    <% if (security) { %>compile("org.springframework.boot:spring-boot-starter-security:<%= bootVersion %>")<% } %>
+    <% if (aop) { %>compile("org.springframework.boot:spring-boot-starter-aop:<%= bootVersion %>")<% } %>
+    <% if (websocket) { %>compile("org.springframework.boot:spring-boot-starter-websocket:<%= bootVersion %>")<% } %>
+    <% if (jersey) { %>compile("org.springframework.boot:spring-boot-starter-jersey:<%= bootVersion %>")<% } %>
+    <% if (rest) { %>compile("org.springframework.boot:spring-boot-starter-data-rest:<%= bootVersion %>")<% } %>
+    <% if (hateoas) { %>compile("org.springframework.boot:spring-boot-starter-hateoas:<%= bootVersion %>")<% } %>
+    <% if (mobile) { %>compile("org.springframework.boot:spring-boot-starter-mobile:<%= bootVersion %>")<% } %>
+
+    <% if (thymeleaf) { %>compile("org.springframework.boot:spring-boot-starter-thymeleaf:<%= bootVersion %>")<% } %>
+    <% if (gtemplates) { %>compile("org.springframework.boot:spring-boot-starter-groovy-templates:<%= bootVersion %>")<% } %>
+    <% if (mustache) { %>compile("org.springframework.boot:spring-boot-starter-mustache:<%= bootVersion %>")<% } %>
+
+    <% if (jdbc) { %>compile("org.springframework.boot:spring-boot-starter-jdbc:<%= bootVersion %>")<% } %>
+    <% if (jpa) { %>compile("org.springframework.boot:spring-boot-starter-data-jpa:<%= bootVersion %>")<% } %>
+    <% if (mongodb) { %>compile("org.springframework.boot:spring-boot-starter-data-mongodb:<%= bootVersion %>")<% } %>
+    <% if (redis) { %>compile("org.springframework.boot:spring-boot-starter-redis:<%= bootVersion %>")<% } %>
+    <% if (solr) { %>compile("org.springframework.boot:spring-boot-starter-data-solr:<%= bootVersion %>")<% } %>
+    <% if (elasticsearch) { %>compile("org.springframework.boot:spring-boot-starter-data-elasticsearch:<%= bootVersion %>")<% } %>
+
+    <% if (connectors) { %>compile("org.springframework.boot:spring-boot-starter-cloud-connectors")<% } %>
+    <% if (bootstrap) { %>compile("org.springframework.cloud:spring-cloud-starter")<% } %>
+    <% if (configClient) { %>compile("org.springframework.cloud:spring-cloud-starter-config")<% } %>
+    <% if (configServer) { %>compile("org.springframework.cloud:spring-cloud-config-server")<% } %>
+    <% if (eureka) { %>compile("org.springframework.cloud:spring-cloud-starter-eureka")<% } %>
+    <% if (eurekaServer) { %>compile("org.springframework.cloud:spring-cloud-starter-eureka-server")<% } %>
+    <% if (feign) { %>compile("org.springframework.cloud:spring-cloud-starter-feign")<% } %>
+    <% if (hystrix) { %>compile("org.springframework.cloud:spring-cloud-starter-hystrix")<% } %>
+    <% if (hystrixDashboard) { %>compile("org.springframework.cloud:spring-cloud-starter-hystrix-dashboard")<% } %>
+    <% if (oauth2) { %>compile("org.springframework.cloud:spring-cloud-starter-oauth2")<% } %>
+    <% if (ribbon) { %>compile("org.springframework.cloud:spring-cloud-starter-ribbon")<% } %>
+    <% if (turbine) { %>compile("org.springframework.cloud:spring-cloud-starter-turbine")<% } %>
+    <% if (turbineAmqp) { %>compile("org.springframework.cloud:spring-cloud-starter-turbine-amqp")<% } %>
+    <% if (zuul) { %>compile("org.springframework.cloud:spring-cloud-starter-zuul")<% } %>
+    <% if (aws) { %>compile("org.springframework.cloud:spring-cloud-starter-aws")<% } %>
+    <% if (awsJdbc) { %>compile("org.springframework.cloud:spring-cloud-starter-aws-jdbc")<% } %>
+    <% if (awsMessaging) { %>compile("org.springframework.cloud:spring-cloud-starter-aws-messaging")<% } %>
+    <% if (cloudBus) { %>compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")<% } %>
+    <% if (cloudSecurity) { %>compile("org.springframework.cloud:spring-cloud-starter-security")<% } %>
+
+    <% if (batch) { %>compile("org.springframework.boot:spring-boot-starter-batch:<%= bootVersion %>")<% } %>
+    <% if (integration) { %>compile("org.springframework.boot:spring-boot-starter-integration:<%= bootVersion %>")<% } %>
+    <% if (jms) { %>compile("org.springframework.boot:spring-boot-starter-hornetq:<%= bootVersion %>")<% } %>
+    <% if (amqp) { %>compile("org.springframework.boot:spring-boot-starter-amqp:<%= bootVersion %>")<% } %>
+    <% if (mail) { %>compile("org.springframework.boot:spring-boot-starter-mail:<%= bootVersion %>")<% } %>
+
+    <% if (facebook) { %>compile("org.springframework.boot:spring-boot-starter-social-facebook:<%= bootVersion %>")<% } %>
+    <% if (linkedin) { %>compile("org.springframework.boot:spring-boot-starter-social-linkedin:<%= bootVersion %>")<% } %>
+    <% if (twitter) { %>compile("org.springframework.boot:spring-boot-starter-social-twitter:<%= bootVersion %>")<% } %>
+
+    <% if (actuator) { %>compile("org.springframework.boot:spring-boot-starter-actuator:<%= bootVersion %>")<% } %>
+    <% if (remoteshell) { %>compile("org.springframework.boot:spring-boot-starter-remote-shell:<%= bootVersion %>")<% } %>
+    compile("org.codehaus.groovy:groovy:<%= groovyVersion %>")
+
+    <% if (h2) { %>runtime("com.h2database:h2")<% } %>
+    <% if (hsqldb) { %>runtime("org.hsqldb:hsqldb")<% } %>
+    <% if (derby) { %>runtime("org.apache.derby:derby")<% } %>
+    <% if (mysql) { %>runtime("mysql:mysql-connector-java")<% } %>
+    <% if (postgresql) { %>runtime("org.postgresql:postgresql:9.4-1201-jdbc41")<% } %>
+
+    <% if (useSpock) { %>
+    testCompile("org.spockframework:spock-spring")
+    testCompile("org.spockframework:spock-core:1.0-groovy-2.4")
+    <% } %>
+    <% if (web) { %>testCompile("org.springframework.boot:spring-boot-starter-test:<%= bootVersion %>")<% } %>
 }
 
-task run(type:Exec){
-    commandLine "java -jar build/libs/<%=baseName%>-0.1.0.jar".split(' ')
-}
-
-run.dependsOn build
-
-<% if( useWrapper ){ %>
-task (type: Wrapper) {
-    gradleVersion = '1.8'
+<% if (usesCloud) { %>
+dependencyManagement {
+  imports {
+    mavenBom("org.springframework.cloud:spring-cloud-starter-parent:Angel.SR3")
+  }
 }
 <% } %>
+<% if (packagingType === 'jar') { %>
+jar {
+    baseName = '<%= baseName %>'
+    version =  "0.0.1"
+}<% } %>
+<% if (packagingType === 'war') { %>
+war {
+    baseName =  '<%= baseName %>'
+    version = "0.0.1"
+}<% } %>
+
+task (type: Wrapper) {
+    gradleVersion = '2.3'
+}
