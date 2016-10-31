@@ -11,10 +11,10 @@ A [Yeoman](http://yeoman.io) generator for scaffolding and bootstrapping [Spring
 $ npm install -g yo
 ```
 
-**Install generator-spring (fork)**
+**Install generator-spring**
 
 ```
-$ npm install -g davetownsend/generator-spring
+$ npm install -g generator-spring
 ```
 
 **Initiate spring-generator!**
