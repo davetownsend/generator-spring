@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var mkdirp = require('mkdirp');
 
 var HateoasGenerator = module.exports = function HateoasGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
@@ -53,8 +54,8 @@ HateoasGenerator.prototype.files = function app() {
     var controllersDir = 'src/main/java/' + packageFolder + '/controller';
     var domainsDir = 'src/main/java/' + packageFolder + '/domain';
 
-    this.mkdir(controllersDir);
-    this.mkdir(domainsDir);
+    mkdirp(controllersDir);
+    mkdirp(domainsDir);
 
     this.template('Controller.java', controllersDir + '/' + this.controllerName + '.java');
     this.template('Representation.java', domainsDir + '/' + this.representation + '.java');

@@ -1,0 +1,6 @@
+info:
+  version: 0.0.1
+
+spring:
+  application:
+    name: <%= baseName %>

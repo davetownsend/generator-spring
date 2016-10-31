@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var mkdirp = require('mkdirp');
 
 var RestGenerator = module.exports = function RestGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
@@ -53,8 +54,8 @@ RestGenerator.prototype.files = function app() {
     var controllersDir = 'src/main/java/' + packageFolder + '/controller';
     var viewsDir = 'src/main/resources/templates';
 
-    this.mkdir(controllersDir);
-    this.mkdir(viewsDir);
+    mkdirp(controllersDir);
+    mkdirp(viewsDir);
 
     this.template('Controller.java', controllersDir + '/' + this.controllerName + '.java');
     this.template('view.html', viewsDir + '/' + this.viewName + '.html');
