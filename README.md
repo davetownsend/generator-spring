@@ -1,3 +1,5 @@
+![logo](logo/Gen-Spring-Logo.jpg?raw=true) 
+
 # generator-spring [![Build Status](https://travis-ci.org/davetownsend/generator-spring.svg?branch=master)](https://travis-ci.org/davetownsend/generator-spring)
 
 A [Yeoman](http://yeoman.io) generator for scaffolding and bootstrapping [Spring Boot](http://projects.spring.io/spring-boot/) and [Spring Cloud](http://projects.spring.io/spring-cloud/) applications. Provides the same selectable options as [Spring Initializr](http://start.spring.io), but with and interactive CLI interface so your hands can stay where they belong, on the keyboard!
