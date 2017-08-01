@@ -47,7 +47,7 @@ $ yo spring:route
 ```
 
 ## TODO
-- Add the new Spring Cloud libs supported with Spring Boot 1.4.1
+- Add the new Spring Cloud libs supported with Spring Boot 1.5.x
 - Add React support. This will essentially scaffold an opinionated react SPA (webpack/es6/material-ui) as the front end.
 
 ## License
