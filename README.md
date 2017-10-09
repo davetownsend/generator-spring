@@ -48,6 +48,7 @@ $ yo spring:route
 
 ## TODO
 - Add the new Spring Cloud libs supported with Spring Boot 1.5.x
+- Add support for createing a serverless (AWS) project with Spring Cloud Function. 
 - Add React support. This will essentially scaffold an opinionated react SPA (webpack/es6/material-ui) as the front end.
 
 ## License
